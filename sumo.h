@@ -1,6 +1,8 @@
 #ifndef SUMO_H_
 #define SUMO_H_
 
+#include "ir.h"
+
 
 #define STATE_START  0 // STATE = 0: Start state, nothing happening
 #define STATE_LOCATE 1 // STATE = 1: Locating Mode - Arching until we see the other robot

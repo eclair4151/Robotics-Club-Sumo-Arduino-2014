@@ -27,7 +27,7 @@ void loop()
 			case STATE_START: {
 				// Begin arching
 
-				STATE = START_LOCATE;
+				STATE = STATE_LOCATE;
 			}
 			case STATE_LOCATE: { // Eventually all other states should go back to this one once they are done
 				// Check IR sensor for other robot

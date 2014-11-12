@@ -1,1 +1,0 @@
-/* Insert code to detect white edge line */

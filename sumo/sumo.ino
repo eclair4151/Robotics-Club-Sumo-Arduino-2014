@@ -1,13 +1,11 @@
 #include "sumo.h"
 
+static int STATE = STATE_START;
+
 void setup()
 {
 	Serial.begin(9600);
 }
-
-
-
-static int STATE = STATE_START;
 
 void loop()
 {
@@ -32,10 +30,10 @@ void loop()
 			case STATE_LOCATE: { // Eventually all other states should go back to this one once they are done
 				// Check IR sensor for other robot
 
-				if(){ // Found straight ahead
+				if(front_ir.objectAhead()){ // Found straight ahead
 					STATE = STATE_ATTACK;
 				}
-				else{ // Found behind
+				else if(back_ir.objectAhead()){ // Found behind
 					// Modify motot arching
 				}
 
@@ -65,20 +63,18 @@ void loop()
 
 		// Special case state transitions
 
-		if(){ // Edge detected
+		if(refl.onEdge()){ // Edge detected
 			STATE = STATE_EDGE;
 		}
 
-		if(){ // Collision
+		if(accel.collided()){ // Collision
 
-			if(){ // Head-on
-				STATE = STATE_ENGAGING;
+			if(accel.getDirection() == DIR_FRONT){ // Head-on
+				STATE = STATE_ENGAGE;
 			}
 			else{
-				STATE = STATE_DEFENDING;
+				STATE = STATE_DEFEND;
 			}
-
-
 		}
 
 
@@ -88,7 +84,5 @@ void loop()
 
 }
 
-
-
-
+#endif
 

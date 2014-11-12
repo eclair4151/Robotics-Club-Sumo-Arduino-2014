@@ -22,7 +22,7 @@ private:
 	int pin;
 	int lastVal;
 	int val;
-}
+};
 
 
 

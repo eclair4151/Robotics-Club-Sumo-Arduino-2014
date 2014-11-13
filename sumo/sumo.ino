@@ -1,4 +1,9 @@
 #include "sumo.h"
+#include <QTRSensors.h>
+#include <ZumoReflectanceSensorArray.h>
+
+
+#include <Arduino.h>
 
 static int STATE = STATE_START;
 
@@ -54,7 +59,7 @@ void loop()
 
 			}
 			case STATE_EDGE: {
-
+                                 
 				// Depending on which reflectance sensor was hit, turn to not fall off
 
 			}
@@ -84,5 +89,5 @@ void loop()
 
 }
 
-#endif
+
 

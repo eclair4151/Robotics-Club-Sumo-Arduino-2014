@@ -2,6 +2,7 @@
 #define RELFECTANCE_H_
 
 
+
 class Reflectance
 {
 public:
@@ -16,5 +17,6 @@ public:
 
 
 #endif /* RELFECTANCE_H_ */
+
 
 

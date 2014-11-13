@@ -6,7 +6,7 @@
 #include <ZumoReflectanceSensorArray.h>
 
 
-#define QTR_THRESHOLD  1500
+#define QTR_THRESHOLD  250
 
 #define NUM_SENSORS 6
 unsigned int sensor_values[NUM_SENSORS];
@@ -20,12 +20,9 @@ void Reflectance::update(){
 
 
 int Reflectance::onEdge(){
-	if(sensor_values[0] < QTR_THRESHOLD)
-		return 1;
 
-	if(sensor_values[5] < QTR_THRESHOLD)
-		return 2;
+	int left = sensor_values[0];
+	int right = sensor_values[5];
+	return (right < QTR_THRESHOLD || left < QTR_THRESHOLD);
 
-
-	return 0;
 }

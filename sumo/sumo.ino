@@ -1,23 +1,53 @@
 #include "sumo.h"
+#include <Wire.h>
+#include <LSM303.h>
+#include <QTRSensors.h>
+#include <ZumoMotors.h>
+#include <ZumoReflectanceSensorArray.h>
+#include <ZumoBuzzer.h>
+#include <Pushbutton.h>
+
+
 
 static int STATE = STATE_START;
 
 void setup()
 {
 	Serial.begin(9600);
+
+	accel.setup();
+
 }
+
+
+ZumoBuzzer buzzer;
+Pushbutton button(ZUMO_BUTTON);
+
+void waitForStart()
+{
+	button.waitForButton();
+
+	for (int i = 0; i < 5; i++)
+	{
+		delay(1000);
+		buzzer.playNote(NOTE_G(3), 200, 15);
+	}
+}
+
 
 void loop()
 {
-	// Insert start button code here
-
+	waitForStart();
 
 	while(1){
 
 		// Update motors
 
 		// Take sensor readings
-
+		accel.update();
+		refl.update();
+		front_ir.update();
+		back_ir.update();
 
 
 		// State actions
@@ -83,6 +113,4 @@ void loop()
 	}
 
 }
-
-#endif
 

@@ -11,6 +11,16 @@
 class Accelerometer
 {
 public:
+
+	/* Initialize the accelerometer */
+	void setup();
+
+
+	/* Called to read the next value */
+	void update();
+
+
+
 	/* Returns whether or not the robot just collided */
 	int collided();
 

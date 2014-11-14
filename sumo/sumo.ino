@@ -37,18 +37,18 @@ void waitForStart()
 
 void loop()
 {
-	waitForStart();
-
-	while(1){
+	//waitForStart();
+      
+	
+       while(1){
 
 		// Update motors
-
 		// Take sensor readings
+               Serial.println("go");
 		accel.update();
-		refl.update();
-		front_ir.update();
-		back_ir.update();
-
+		//refl.update();
+		//front_ir.update();
+		//back_ir.update();
 
 		// State actions
 		switch(STATE){
@@ -89,7 +89,7 @@ void loop()
 
 			}
 		}
-
+                 
 
 		// Special case state transitions
 
@@ -106,7 +106,7 @@ void loop()
 				STATE = STATE_DEFEND;
 			}
 		}
-
+              
 
 		// Sleep
 		delay(33);

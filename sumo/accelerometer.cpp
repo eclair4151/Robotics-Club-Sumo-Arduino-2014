@@ -16,6 +16,7 @@ void Accelerometer::setup(){
 
 void Accelerometer::update(){
 	compass.read();
+	//this is where stuff will go
 }
 
 

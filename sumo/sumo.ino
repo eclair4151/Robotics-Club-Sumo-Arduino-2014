@@ -37,19 +37,24 @@ void waitForStart()
 
 void loop()
 {
+     
 	//waitForStart();
-      
-	
-       while(1){
+        robotMotor.arc(DIR_RIGHT,35);
 
+       while(1){
+                 
 		// Update motors
 		// Take sensor readings
-               Serial.println("go");
-		accel.update();
-		//refl.update();
-		//front_ir.update();
-		//back_ir.update();
+		//accel.update();
+		refl.update();
+		front_ir.update();
+		back_ir.update();
 
+                if(refl.onEdge())
+                {
+                  Serial.println("HIT LINE");
+                }
+                
 		// State actions
 		switch(STATE){
 			case STATE_START: {

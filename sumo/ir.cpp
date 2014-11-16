@@ -29,5 +29,5 @@ float IrSensor::voltage(){
 
 
 int IrSensor::objectAhead(){
-	return this->val > 0 && this->val < 500;
+	return this->distance() > 0 && this->distance() < 250;
 }

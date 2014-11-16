@@ -21,7 +21,7 @@ IrSensor back_ir(1);
 
 Reflectance refl;
 Accelerometer accel;
-
+Motor robotMotor;
 
 #endif /* SUMO_H_ */
 

@@ -59,10 +59,13 @@ void loop()
 		switch(STATE){
 			case STATE_START: {
 				// Begin arching
+				robotMotor.arc(DIR_RIGHT, 35);
 
 				STATE = STATE_LOCATE;
 			}
 			case STATE_LOCATE: { // Eventually all other states should go back to this one once they are done
+
+
 				// Check IR sensor for other robot
 
 				if(front_ir.objectAhead()){ // Found straight ahead
@@ -70,13 +73,14 @@ void loop()
 				}
 				else if(back_ir.objectAhead()){ // Found behind
 					// Modify motot arching
+					robotMotor.arc(DIR_LEFT, 5)
 				}
 
 			}
 			case STATE_ATTACK: {
 				// Track robot and move towards it
 				if(!front_ir.objectAhead()){
-					STATE = STATE_LOCATE;
+					STATE = STATE_START;
 				}
 				else
 					robotMotor.forward();
@@ -93,7 +97,16 @@ void loop()
 			case STATE_EDGE: {
 				// Depending on which reflectance sensor was hit, turn to not fall off
 
-
+				if(refl.onEdge() == DIR_RIGHT){
+					robotMotor.arch(DIR_LEFT, 0);
+				}
+				else if(refl.onEdge() == DIR_LEFT){
+					robotMotor.arch(DIR_RIGHT, 0);
+				}
+				else{
+					delay(100);
+					STATE = STATE_STARt;
+				}
 
 			}
 		}

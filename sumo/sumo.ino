@@ -37,12 +37,12 @@ void waitForStart()
 
 void loop()
 {
-     
-	//waitForStart();
-        robotMotor.arc(DIR_RIGHT,35);
 
-       while(1){
-                 
+	//waitForStart();
+	robotMotor.arc(DIR_RIGHT,35);
+
+	while(1){
+
 		// Update motors
 		// Take sensor readings
 		//accel.update();
@@ -50,11 +50,11 @@ void loop()
 		front_ir.update();
 		back_ir.update();
 
-                if(refl.onEdge())
-                {
-                  Serial.println("HIT LINE");
-                }
-                
+		if(refl.onEdge())
+		{
+			Serial.println("HIT LINE");
+		}
+
 		// State actions
 		switch(STATE){
 			case STATE_START: {
@@ -74,14 +74,16 @@ void loop()
 
 			}
 			case STATE_ATTACK: {
-
 				// Track robot and move towards it
-
+				if(!front_ir.objectAhead()){
+					STATE = STATE_LOCATE;
+				}
+				else
+					robotMotor.forward();
 			}
 			case STATE_ENGAGE: {
-
 				// Go straight on full power
-
+				robotMotor.forward();
 			}
 			case STATE_DEFEND: {
 
@@ -89,12 +91,13 @@ void loop()
 
 			}
 			case STATE_EDGE: {
-
 				// Depending on which reflectance sensor was hit, turn to not fall off
+
+
 
 			}
 		}
-                 
+
 
 		// Special case state transitions
 
@@ -111,7 +114,7 @@ void loop()
 				STATE = STATE_DEFEND;
 			}
 		}
-              
+
 
 		// Sleep
 		delay(33);

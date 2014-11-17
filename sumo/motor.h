@@ -11,7 +11,13 @@
 class Motor
 {
 public:
-void arc(int dir, float r);
+	/* Begin moving in an arc determined by the given direction and radius of the circle (in cm) */
+	void arc(int dir, float r);
+
+	void forward();
+
+	void stop();
 
 };
+
 #endif /* MOTOR_H_ */

@@ -75,7 +75,14 @@ void loop()
 					// Modify motot arching
 					robotMotor.arc(DIR_LEFT, 5);
 				}
-
+                                else if(right_ir.objectAhead()){ // Found behind
+					// Modify motot arching
+					robotMotor.arc(DIR_RIGHT, 5);
+				}
+                                else if(left_ir.objectAhead()){ // Found behind
+					// Modify motot arching
+					robotMotor.arc(DIR_LEFT, 5);
+				}
 			        break;
 			case STATE_ATTACK: 
 				// Track robot and move towards it

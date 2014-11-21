@@ -15,7 +15,8 @@ public:
 	void arc(int dir, float r);
 
 	void forward();
-
+        void backward();
+        
 	void stop();
 
 };

@@ -9,7 +9,6 @@
 
 
 unsigned int sensor_values[NUM_SENSORS];
-
 ZumoReflectanceSensorArray sensors(QTR_NO_EMITTER_PIN);
 
 

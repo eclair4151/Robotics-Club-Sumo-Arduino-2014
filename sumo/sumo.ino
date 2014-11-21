@@ -14,9 +14,7 @@ static int STATE = STATE_START;
 void setup()
 {
 	Serial.begin(9600);
-
-	accel.setup();
-
+	//accel.setup();
 }
 
 
@@ -38,7 +36,7 @@ void waitForStart()
 void loop()
 {
 
-	//waitForStart();
+	waitForStart();
 	robotMotor.arc(DIR_RIGHT,35);
 
 	while(1){
@@ -65,7 +63,7 @@ void loop()
 			        break;
 			case STATE_LOCATE:  // Eventually all other states should go back to this one once they are done
 
-
+                                  
 				// Check IR sensor for other robot
 
 				if(front_ir.objectAhead()){ // Found straight ahead
@@ -103,15 +101,19 @@ void loop()
 			        break;
 			case STATE_EDGE: 
 				// Depending on which reflectance sensor was hit, turn to not fall off
-
+                                  
 				if(refl.onEdge() == DIR_RIGHT){
+                                        robotMotor.backward();
+                                        delay(500);
 					robotMotor.arc(DIR_LEFT, 0);
 				}
 				else if(refl.onEdge() == DIR_LEFT){
+                                        robotMotor.backward();
+                                        delay(500);
 					robotMotor.arc(DIR_RIGHT, 0);
 				}
 				else{
-					delay(100);
+					delay(300);
 					STATE = STATE_START;
 				}
 
@@ -121,11 +123,12 @@ void loop()
 
 		// Special case state transitions
 
-		if(refl.onEdge()){ // Edge detected
+		if(refl.onEdge() == DIR_RIGHT || refl.onEdge() == DIR_LEFT){ // Edge detected
 			STATE = STATE_EDGE;
+                        
 		}
 
-		if(accel.collided()){ // Collision
+		/*if(accel.collided()){ // Collision
 
 			if(accel.getDirection() == DIR_FRONT){ // Head-on
 				STATE = STATE_ENGAGE;
@@ -133,7 +136,7 @@ void loop()
 			else{
 				STATE = STATE_DEFEND;
 			}
-		}
+		}*/
 
 
 		// Sleep

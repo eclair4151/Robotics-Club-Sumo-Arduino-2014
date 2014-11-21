@@ -37,6 +37,12 @@ void Motor::forward()
 	motor.setSpeeds(MOTOR_POWER, MOTOR_POWER);
 }
 
+void Motor::backward()
+{
+	motor.flipRightMotor(true);
+	motor.setSpeeds(-MOTOR_POWER, -MOTOR_POWER);
+}
+
 void Motor::stop()
 {
 	motor.setSpeeds(0, 0);

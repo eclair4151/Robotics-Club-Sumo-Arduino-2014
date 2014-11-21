@@ -60,11 +60,12 @@ void Accelerometer::update(){
 	long averagedY = averageArray(lastValuesY);
 	long averagedZ = averageArray(lastValuesZ);
 
-	index = index+1;
+	index = index + 1;
 	index = index % SENSITIVITY;
 
 	long averageXY = sqrt(averagedX*averagedX + averagedY*averagedY);
-	/*Serial.print(averagedX);
+	
+       /*Serial.print(averagedX);
        Serial.print("      ");
        Serial.print(averagedY);
        Serial.print("      ");
@@ -75,7 +76,7 @@ void Accelerometer::update(){
 
 	if(averageXY > 3000)
 	{
-		Serial.println("HIT!");
+		Serial.println("SMASH!");
 	}
 }
 

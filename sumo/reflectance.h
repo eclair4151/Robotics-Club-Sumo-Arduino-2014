@@ -3,7 +3,7 @@
 
 #define DIR_RIGHT 1
 #define DIR_LEFT 2
-#define QTR_THRESHOLD  250
+#define QTR_THRESHOLD  1500
 #define NUM_SENSORS 6
 
 class Reflectance

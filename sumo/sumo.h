@@ -18,8 +18,8 @@
 
 IrSensor front_ir(0);
 IrSensor back_ir(1);
-IrSensor right_ir(2);
-IrSensor left_ir(3);
+IrSensor right_ir(3);
+IrSensor left_ir(5);
 
 Reflectance refl;
 Accelerometer accel;

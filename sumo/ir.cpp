@@ -20,6 +20,8 @@ void IrSensor::update(){
 }
 
 int IrSensor::distance(){
+        int dir = (6762/(this->val-9))-4;
+        Serial.println(dir);
 	return (6762/(this->val-9))-4;
 }
 
@@ -29,5 +31,5 @@ float IrSensor::voltage(){
 
 
 int IrSensor::objectAhead(){
-	return this->distance() > 0 && this->distance() < 250;
+	return this->distance() > 0 && this->distance() < 60;
 }

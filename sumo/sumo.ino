@@ -14,7 +14,6 @@ static int STATE = STATE_START;
 void setup()
 {
 	Serial.begin(9600);
-	//accel.setup();
 }
 
 
@@ -35,23 +34,39 @@ void waitForStart()
 
 void loop()
 {
-
+        while(1){
+		//front_ir.update();
+		//back_ir.update();
+                left_ir.update();
+               // right_ir.update();
+          
+                left_ir.objectAhead();
+              //  Serial.print(front_ir.objectAhead());
+                Serial.print(" ");
+               // Serial.print(back_ir.objectAhead());
+                Serial.print(" ");
+                //Serial.print(left_ir.objectAhead());
+                Serial.print(" ");
+               // Serial.println(right_ir.objectAhead());
+               
+                delay(200);
+        }
+  
+  
+  
 	waitForStart();
-	robotMotor.arc(DIR_RIGHT,35);
+	robotMotor.arc(DIR_LEFT,35);
 
 	while(1){
 
 		// Update motors
 		// Take sensor readings
-		//accel.update();
+
 		refl.update();
 		front_ir.update();
 		back_ir.update();
-
-		if(refl.onEdge())
-		{
-			Serial.println("HIT LINE");
-		}
+                left_ir.update();
+                right_ir.update();
 
 		// State actions
 		switch(STATE){
@@ -68,19 +83,22 @@ void loop()
 
 				if(front_ir.objectAhead()){ // Found straight ahead
 					STATE = STATE_ATTACK;
+                                  buzzer.playNote(NOTE_C(3), 200, 15);
 				}
 				else if(back_ir.objectAhead()){ // Found behind
 					// Modify motot arching
-					robotMotor.arc(DIR_LEFT, 5);
+					robotMotor.arc(DIR_RIGHT, 0);
+                                  //buzzer.playNote(NOTE_G(3), 200, 15);
 				}
                                 else if(right_ir.objectAhead()){ // Found behind
 					// Modify motot arching
-					robotMotor.arc(DIR_RIGHT, 5);
+					robotMotor.arc(DIR_LEFT, 0);
+                                 // buzzer.playNote(NOTE_F(3), 200, 15);
 				}
-                                else if(left_ir.objectAhead()){ // Found behind
+                               /* else if(left_ir.objectAhead()){ // Found behind
 					// Modify motot arching
 					robotMotor.arc(DIR_LEFT, 5);
-				}
+				}*/
 			        break;
 			case STATE_ATTACK: 
 				// Track robot and move towards it
@@ -128,15 +146,6 @@ void loop()
                         
 		}
 
-		/*if(accel.collided()){ // Collision
-
-			if(accel.getDirection() == DIR_FRONT){ // Head-on
-				STATE = STATE_ENGAGE;
-			}
-			else{
-				STATE = STATE_DEFEND;
-			}
-		}*/
 
 
 		// Sleep
